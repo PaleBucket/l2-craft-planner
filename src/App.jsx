@@ -1573,8 +1573,6 @@ export default function L2CraftPlanner() {
 
       {/* Analytics Tab */}
       {activeTab === 'analytics' && (
-      {/* Analytics Tab */}
-      {activeTab === 'analytics' && (
         <div className="card">
           <h2 style={{ marginTop: 0, fontSize: '20px', letterSpacing: '2px', marginBottom: '20px' }}>
             PROFIT ANALYTICS
