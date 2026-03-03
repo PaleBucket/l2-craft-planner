@@ -1,209 +1,39 @@
 [
-  {
-    "id": "ek52qp38l",
-    "name": "Silver Mold",
-    "buyPrice": 30000,
-    "sellPrice": 30000,
-    "isCraftable": true,
-    "recipe": [
-      {
-        "itemId": "me6xh8mct",
-        "quantity": 5
-      },
-      {
-        "itemId": "vrj494aw4",
-        "quantity": 5
-      },
-      {
-        "itemId": "t7udcw3i2",
-        "quantity": 10
-      }
-    ]
-  },
-  {
-    "id": "me6xh8mct",
-    "name": "Braided Hemp",
-    "buyPrice": 230,
-    "sellPrice": 230,
-    "isCraftable": true,
-    "recipe": [
-      {
-        "itemId": "eui3h7xdj",
-        "quantity": 5
-      }
-    ]
-  },
-  {
-    "id": "eui3h7xdj",
-    "name": "Stem",
-    "buyPrice": 35,
-    "sellPrice": 35,
-    "isCraftable": false,
-    "recipe": []
-  },
-  {
-    "id": "vrj494aw4",
-    "name": "Cokes",
-    "buyPrice": 450,
-    "sellPrice": 450,
-    "isCraftable": true,
-    "recipe": [
-      {
-        "itemId": "k5rd74me9",
-        "quantity": 3
-      },
-      {
-        "itemId": "43r72c1ab",
-        "quantity": 3
-      }
-    ]
-  },
-  {
-    "id": "k5rd74me9",
-    "name": "Coal",
-    "buyPrice": 130,
-    "sellPrice": 130,
-    "isCraftable": false,
-    "recipe": []
-  },
-  {
-    "id": "43r72c1ab",
-    "name": "Charcoal",
-    "buyPrice": 63,
-    "sellPrice": 63,
-    "isCraftable": false,
-    "recipe": []
-  },
-  {
-    "id": "t7udcw3i2",
-    "name": "Silver Nugget",
-    "buyPrice": 155,
-    "sellPrice": 155,
-    "isCraftable": false,
-    "recipe": []
-  },
-  {
-    "id": "hw1r8mpwa",
-    "name": "Varnish of Purity",
-    "buyPrice": 26000,
-    "sellPrice": 26000,
-    "isCraftable": true,
-    "recipe": [
-      {
-        "itemId": "q4n95tfbx",
-        "quantity": 3
-      },
-      {
-        "itemId": "q8hvdduwt",
-        "quantity": 1
-      },
-      {
-        "itemId": "yidr8kxu5",
-        "quantity": 3
-      }
-    ]
-  },
-  {
-    "id": "q4n95tfbx",
-    "name": "Coarse Bone Powder",
-    "buyPrice": 5800,
-    "sellPrice": 5800,
-    "isCraftable": true,
-    "recipe": [
-      {
-        "itemId": "u0q07hdvc",
-        "quantity": 10
-      }
-    ]
-  },
-  {
-    "id": "u0q07hdvc",
-    "name": "Animal Bone",
-    "buyPrice": 540,
-    "sellPrice": 540,
-    "isCraftable": false,
-    "recipe": []
-  },
-  {
-    "id": "q8hvdduwt",
-    "name": "Stone Of Purity",
-    "buyPrice": 5500,
-    "sellPrice": 5500,
-    "isCraftable": false,
-    "recipe": []
-  },
-  {
-    "id": "yidr8kxu5",
-    "name": "Varnish",
-    "buyPrice": 730,
-    "sellPrice": 730,
-    "isCraftable": false,
-    "recipe": []
-  },
-  {
-    "id": "matndysdy",
-    "name": "Blacksmith Frame",
-    "buyPrice": 256000,
-    "sellPrice": 256000,
-    "isCraftable": true,
-    "recipe": [
-      {
-        "itemId": "pscfz4ki6",
-        "quantity": 10
-      },
-      {
-        "itemId": "ek52qp38l",
-        "quantity": 1
-      },
-      {
-        "itemId": "hw1r8mpwa",
-        "quantity": 5
-      }
-    ]
-  },
-  {
-    "id": "pscfz4ki6",
-    "name": "Mithril Ore",
-    "buyPrice": 9400,
-    "sellPrice": 9400,
-    "isCraftable": false,
-    "recipe": []
-  },
-  {
-    "id": "rqphe5k1g",
-    "name": "Asofe",
-    "buyPrice": 7500,
-    "sellPrice": 7500,
-    "isCraftable": false,
-    "recipe": []
-  },
-  {
-    "id": "h2d9x1nwc",
-    "name": "Mold Glue",
-    "buyPrice": 2000,
-    "sellPrice": 2000,
-    "isCraftable": false,
-    "recipe": []
-  },
-  {
-    "id": "d23l0j7o4",
-    "name": "Maestro Mold",
-    "buyPrice": 330000,
-    "sellPrice": 330000,
-    "isCraftable": true,
-    "recipe": [
-      {
-        "itemId": "h2d9x1nwc",
-        "quantity": 10
-      },
-      {
-        "itemId": "matndysdy",
-        "quantity": 1
-      },
-      {
-        "itemId": "rqphe5k1g",
-        "quantity": 5
-      }
-    ]
-  }
+  {"id":"ek52qp38l","name":"Silver Mold","price":12500,"isCraftable":true,"recipe":[{"itemId":"me6xh8mct","quantity":5},{"itemId":"vrj494aw4","quantity":5},{"itemId":"t7udcw3i2","quantity":10}]},
+  {"id":"me6xh8mct","name":"Braided Hemp","price":230,"isCraftable":true,"recipe":[{"itemId":"eui3h7xdj","quantity":5}],"craftPreference":"buy"},
+  {"id":"eui3h7xdj","name":"Stem","price":35,"isCraftable":false,"recipe":[]},
+  {"id":"vrj494aw4","name":"Cokes","price":450,"isCraftable":true,"recipe":[{"itemId":"k5rd74me9","quantity":3},{"itemId":"43r72c1ab","quantity":3}]},
+  {"id":"k5rd74me9","name":"Coal","price":130,"isCraftable":false,"recipe":[]},
+  {"id":"43r72c1ab","name":"Charcoal","price":63,"isCraftable":false,"recipe":[]},
+  {"id":"t7udcw3i2","name":"Silver Nugget","price":155,"isCraftable":false,"recipe":[]},
+  {"id":"hw1r8mpwa","name":"Varnish of Purity","price":26000,"isCraftable":true,"recipe":[{"itemId":"q4n95tfbx","quantity":3},{"itemId":"q8hvdduwt","quantity":1},{"itemId":"yidr8kxu5","quantity":3}],"craftPreference":"auto"},
+  {"id":"q4n95tfbx","name":"Coarse Bone Powder","price":5800,"isCraftable":true,"recipe":[{"itemId":"u0q07hdvc","quantity":10}],"craftPreference":"auto"},
+  {"id":"u0q07hdvc","name":"Animal Bone","price":540,"isCraftable":false,"recipe":[]},
+  {"id":"q8hvdduwt","name":"Stone Of Purity","price":5500,"isCraftable":false,"recipe":[]},
+  {"id":"yidr8kxu5","name":"Varnish","price":730,"isCraftable":false,"recipe":[]},
+  {"id":"matndysdy","name":"Blacksmith Frame","price":249000,"isCraftable":true,"recipe":[{"itemId":"pscfz4ki6","quantity":10},{"itemId":"ek52qp38l","quantity":1},{"itemId":"hw1r8mpwa","quantity":5}]},
+  {"id":"pscfz4ki6","name":"Mithril Ore","price":10000,"isCraftable":false,"recipe":[]},
+  {"id":"rqphe5k1g","name":"Asofe","price":7500,"isCraftable":false,"recipe":[]},
+  {"id":"h2d9x1nwc","name":"Mold Glue","price":2000,"isCraftable":false,"recipe":[]},
+  {"id":"d23l0j7o4","name":"Maestro Mold","price":280000,"isCraftable":true,"recipe":[{"itemId":"h2d9x1nwc","quantity":10},{"itemId":"matndysdy","quantity":1},{"itemId":"rqphe5k1g","quantity":5}],"craftPreference":"craft"},
+  {"id":"u73l6vdye","name":"Adamantite Nugget","price":1700,"isCraftable":false,"recipe":[]},
+  {"id":"xjt2jbe9w","name":"Steel Mold","price":6300,"isCraftable":true,"recipe":[{"itemId":"tu6g7d66r","quantity":5},{"itemId":"me6xh8mct","quantity":5},{"itemId":"k5rd74me9","quantity":5}],"craftPreference":"buy"},
+  {"id":"tu6g7d66r","name":"Iron Ore","price":650,"isCraftable":false,"recipe":[]},
+  {"id":"myy67xiwx","name":"Artisan's Frame","price":280000,"isCraftable":true,"recipe":[{"itemId":"u73l6vdye","quantity":10},{"itemId":"xjt2jbe9w","quantity":1},{"itemId":"hw1r8mpwa","quantity":5}]},
+  {"id":"n0y18xzff","name":"Synthetic Cokes","price":21800,"isCraftable":true,"recipe":[{"itemId":"vrj494aw4","quantity":3},{"itemId":"ltij1vuk2","quantity":1}],"craftPreference":"craft"},
+  {"id":"ltij1vuk2","name":"Oriharukon Ore","price":18600,"isCraftable":false,"recipe":[]},
+  {"id":"ocbafq9jo","name":"Mold Hardener","price":13300,"isCraftable":false,"recipe":[]},
+  {"id":"16hxwjyci","name":"Mold Lubricant","price":4500,"isCraftable":false,"recipe":[]},
+  {"id":"zifjsmebp","name":"Maestro Holder","price":389000,"isCraftable":true,"recipe":[{"itemId":"ocbafq9jo","quantity":10},{"itemId":"16hxwjyci","quantity":10},{"itemId":"hw1r8mpwa","quantity":10}]},
+  {"id":"ybaov9nbk","name":"Maestro Anvil Lock","price":122000,"isCraftable":true,"recipe":[{"itemId":"h2d9x1nwc","quantity":4},{"itemId":"16hxwjyci","quantity":4},{"itemId":"n0y18xzff","quantity":4}]},
+  {"id":"ghyfpdhwr","name":"Arcsmith's Anvil","price":795000,"isCraftable":true,"recipe":[{"itemId":"ad8j0ys0e","quantity":10},{"itemId":"16hxwjyci","quantity":20},{"itemId":"ybaov9nbk","quantity":3}]},
+  {"id":"ad8j0ys0e","name":"Thons","price":2000,"isCraftable":false,"recipe":[]},
+  {"id":"fbwytzf2p","name":"Thread","price":40,"isCraftable":false,"recipe":[]},
+  {"id":"a5dnj5hmb","name":"Steel","price":7500,"isCraftable":true,"recipe":[{"itemId":"tu6g7d66r","quantity":5},{"itemId":"yidr8kxu5","quantity":5}]},
+  {"id":"t8uebh01y","name":"Mithril Alloy","price":49000,"isCraftable":true,"recipe":[{"itemId":"pscfz4ki6","quantity":1},{"itemId":"a5dnj5hmb","quantity":2},{"itemId":"hw1r8mpwa","quantity":1}]},
+  {"id":"r0cws30ii","name":"Crafted Leather","price":13600,"isCraftable":true,"recipe":[{"itemId":"k5rd74me9","quantity":4},{"itemId":"x6segs5qu","quantity":4},{"itemId":"uhmrxi9xw","quantity":4}]},
+  {"id":"x6segs5qu","name":"Cord","price":900,"isCraftable":true,"recipe":[]},
+  {"id":"uhmrxi9xw","name":"Leather","price":2200,"isCraftable":true,"recipe":[{"itemId":"t7bn4e5bx","quantity":6}]},
+  {"id":"t7bn4e5bx","name":"Animal Skin","price":310,"isCraftable":false,"recipe":[]},
+  {"id":"i2s4s015c","name":"Metal Hardener","price":1800,"isCraftable":true,"recipe":[{"itemId":"tu6g7d66r","quantity":10},{"itemId":"eui3h7xdj","quantity":10},{"itemId":"yidr8kxu5","quantity":10}]}
 ]
