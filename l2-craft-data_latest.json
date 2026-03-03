@@ -2,8 +2,8 @@
   {
     "id": "ek52qp38l",
     "name": "Silver Mold",
-    "buyPrice": 21000,
-    "sellPrice": 21000,
+    "buyPrice": 12500,
+    "sellPrice": 12500,
     "isCraftable": true,
     "recipe": [
       {
@@ -103,7 +103,7 @@
         "quantity": 3
       }
     ],
-    "craftPreference": "buy"
+    "craftPreference": "auto"
   },
   {
     "id": "q4n95tfbx",
@@ -117,7 +117,7 @@
         "quantity": 10
       }
     ],
-    "craftPreference": "buy"
+    "craftPreference": "auto"
   },
   {
     "id": "u0q07hdvc",
@@ -146,8 +146,8 @@
   {
     "id": "matndysdy",
     "name": "Blacksmith Frame",
-    "buyPrice": 256000,
-    "sellPrice": 256000,
+    "buyPrice": 249000,
+    "sellPrice": 249000,
     "isCraftable": true,
     "recipe": [
       {
@@ -167,8 +167,8 @@
   {
     "id": "pscfz4ki6",
     "name": "Mithril Ore",
-    "buyPrice": 9400,
-    "sellPrice": 9400,
+    "buyPrice": 10000,
+    "sellPrice": 10000,
     "isCraftable": false,
     "recipe": []
   },
@@ -191,8 +191,8 @@
   {
     "id": "d23l0j7o4",
     "name": "Maestro Mold",
-    "buyPrice": 320000,
-    "sellPrice": 320000,
+    "buyPrice": 280000,
+    "sellPrice": 280000,
     "isCraftable": true,
     "recipe": [
       {
@@ -207,7 +207,8 @@
         "itemId": "rqphe5k1g",
         "quantity": 5
       }
-    ]
+    ],
+    "craftPreference": "craft"
   },
   {
     "id": "u73l6vdye",
@@ -250,8 +251,8 @@
   {
     "id": "myy67xiwx",
     "name": "Artisan's Frame",
-    "buyPrice": 250000,
-    "sellPrice": 250000,
+    "buyPrice": 280000,
+    "sellPrice": 280000,
     "isCraftable": true,
     "recipe": [
       {
@@ -265,6 +266,236 @@
       {
         "itemId": "hw1r8mpwa",
         "quantity": 5
+      }
+    ]
+  },
+  {
+    "id": "n0y18xzff",
+    "name": "Synthetic Cokes",
+    "buyPrice": 21800,
+    "sellPrice": 21800,
+    "isCraftable": true,
+    "recipe": [
+      {
+        "itemId": "vrj494aw4",
+        "quantity": 3
+      },
+      {
+        "itemId": "ltij1vuk2",
+        "quantity": 1
+      }
+    ],
+    "craftPreference": "craft"
+  },
+  {
+    "id": "ltij1vuk2",
+    "name": "Oriharukon Ore",
+    "buyPrice": 18600,
+    "sellPrice": 18600,
+    "isCraftable": false,
+    "recipe": []
+  },
+  {
+    "id": "ocbafq9jo",
+    "name": "Mold Hardener",
+    "buyPrice": 13300,
+    "sellPrice": 13300,
+    "isCraftable": false,
+    "recipe": []
+  },
+  {
+    "id": "16hxwjyci",
+    "name": "Mold Lubricant",
+    "buyPrice": 4500,
+    "sellPrice": 4500,
+    "isCraftable": false,
+    "recipe": []
+  },
+  {
+    "id": "zifjsmebp",
+    "name": "Maestro Holder",
+    "buyPrice": 389000,
+    "sellPrice": 389000,
+    "isCraftable": true,
+    "recipe": [
+      {
+        "itemId": "ocbafq9jo",
+        "quantity": 10
+      },
+      {
+        "itemId": "16hxwjyci",
+        "quantity": 10
+      },
+      {
+        "itemId": "hw1r8mpwa",
+        "quantity": 10
+      }
+    ]
+  },
+  {
+    "id": "ybaov9nbk",
+    "name": "Maestro Anvil Lock",
+    "buyPrice": 122000,
+    "sellPrice": 122000,
+    "isCraftable": true,
+    "recipe": [
+      {
+        "itemId": "h2d9x1nwc",
+        "quantity": 4
+      },
+      {
+        "itemId": "16hxwjyci",
+        "quantity": 4
+      },
+      {
+        "itemId": "n0y18xzff",
+        "quantity": 4
+      }
+    ]
+  },
+  {
+    "id": "ghyfpdhwr",
+    "name": "Arcsmith's Anvil",
+    "buyPrice": 795000,
+    "sellPrice": 795000,
+    "isCraftable": true,
+    "recipe": [
+      {
+        "itemId": "ad8j0ys0e",
+        "quantity": 10
+      },
+      {
+        "itemId": "16hxwjyci",
+        "quantity": 20
+      },
+      {
+        "itemId": "ybaov9nbk",
+        "quantity": 3
+      }
+    ]
+  },
+  {
+    "id": "ad8j0ys0e",
+    "name": "Thons",
+    "buyPrice": 2000,
+    "sellPrice": 2000,
+    "isCraftable": false,
+    "recipe": []
+  },
+  {
+    "id": "fbwytzf2p",
+    "name": "Thread",
+    "buyPrice": 40,
+    "sellPrice": 40,
+    "isCraftable": false,
+    "recipe": []
+  },
+  {
+    "id": "a5dnj5hmb",
+    "name": "Steel",
+    "buyPrice": 7500,
+    "sellPrice": 7500,
+    "isCraftable": true,
+    "recipe": [
+      {
+        "itemId": "tu6g7d66r",
+        "quantity": 5
+      },
+      {
+        "itemId": "yidr8kxu5",
+        "quantity": 5
+      }
+    ]
+  },
+  {
+    "id": "t8uebh01y",
+    "name": "Mithril Alloy",
+    "buyPrice": 49000,
+    "sellPrice": 49000,
+    "isCraftable": true,
+    "recipe": [
+      {
+        "itemId": "pscfz4ki6",
+        "quantity": 1
+      },
+      {
+        "itemId": "a5dnj5hmb",
+        "quantity": 2
+      },
+      {
+        "itemId": "hw1r8mpwa",
+        "quantity": 1
+      }
+    ]
+  },
+  {
+    "id": "r0cws30ii",
+    "name": "Crafted Leather",
+    "buyPrice": 13600,
+    "sellPrice": 13600,
+    "isCraftable": true,
+    "recipe": [
+      {
+        "itemId": "k5rd74me9",
+        "quantity": 4
+      },
+      {
+        "itemId": "x6segs5qu",
+        "quantity": 4
+      },
+      {
+        "itemId": "uhmrxi9xw",
+        "quantity": 4
+      }
+    ]
+  },
+  {
+    "id": "x6segs5qu",
+    "name": "Cord",
+    "buyPrice": 900,
+    "sellPrice": 900,
+    "isCraftable": true,
+    "recipe": []
+  },
+  {
+    "id": "uhmrxi9xw",
+    "name": "Leather",
+    "buyPrice": 2200,
+    "sellPrice": 2200,
+    "isCraftable": true,
+    "recipe": [
+      {
+        "itemId": "t7bn4e5bx",
+        "quantity": 6
+      }
+    ]
+  },
+  {
+    "id": "t7bn4e5bx",
+    "name": "Animal Skin",
+    "buyPrice": 310,
+    "sellPrice": 310,
+    "isCraftable": false,
+    "recipe": []
+  },
+  {
+    "id": "i2s4s015c",
+    "name": "Metal Hardener",
+    "buyPrice": 1800,
+    "sellPrice": 1800,
+    "isCraftable": true,
+    "recipe": [
+      {
+        "itemId": "tu6g7d66r",
+        "quantity": 10
+      },
+      {
+        "itemId": "eui3h7xdj",
+        "quantity": 10
+      },
+      {
+        "itemId": "yidr8kxu5",
+        "quantity": 10
       }
     ]
   }

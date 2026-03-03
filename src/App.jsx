@@ -2,45 +2,56 @@ import React, { useState, useEffect, useMemo } from 'react';
 
 // Utility functions
 const formatNumber = (num) => num.toLocaleString();
-const calculateProfit = (sellPrice, craftCost) => sellPrice - craftCost;
-const calculateMargin = (sellPrice, craftCost) => {
+const calculateProfit = (price, craftCost) => price - craftCost;
+const calculateMargin = (price, craftCost) => {
   if (craftCost === 0) return 0;
-  return ((sellPrice - craftCost) / craftCost * 100).toFixed(1);
+  return ((price - craftCost) / craftCost * 100).toFixed(1);
 };
 
 // Generate unique IDs
 const generateId = () => Math.random().toString(36).substr(2, 9);
 
 const DEFAULT_DATA = [
-  {"id":"ek52qp38l","name":"Silver Mold","buyPrice":21000,"sellPrice":21000,"isCraftable":true,"recipe":[{"itemId":"me6xh8mct","quantity":5},{"itemId":"vrj494aw4","quantity":5},{"itemId":"t7udcw3i2","quantity":10}]},
-  {"id":"me6xh8mct","name":"Braided Hemp","buyPrice":230,"sellPrice":230,"isCraftable":true,"recipe":[{"itemId":"eui3h7xdj","quantity":5}],"craftPreference":"buy"},
-  {"id":"eui3h7xdj","name":"Stem","buyPrice":35,"sellPrice":35,"isCraftable":false,"recipe":[]},
-  {"id":"vrj494aw4","name":"Cokes","buyPrice":450,"sellPrice":450,"isCraftable":true,"recipe":[{"itemId":"k5rd74me9","quantity":3},{"itemId":"43r72c1ab","quantity":3}]},
-  {"id":"k5rd74me9","name":"Coal","buyPrice":130,"sellPrice":130,"isCraftable":false,"recipe":[]},
-  {"id":"43r72c1ab","name":"Charcoal","buyPrice":63,"sellPrice":63,"isCraftable":false,"recipe":[]},
-  {"id":"t7udcw3i2","name":"Silver Nugget","buyPrice":155,"sellPrice":155,"isCraftable":false,"recipe":[]},
-  {"id":"hw1r8mpwa","name":"Varnish of Purity","buyPrice":26000,"sellPrice":26000,"isCraftable":true,"recipe":[{"itemId":"q4n95tfbx","quantity":3},{"itemId":"q8hvdduwt","quantity":1},{"itemId":"yidr8kxu5","quantity":3}],"craftPreference":"buy"},
-  {"id":"q4n95tfbx","name":"Coarse Bone Powder","buyPrice":5800,"sellPrice":5800,"isCraftable":true,"recipe":[{"itemId":"u0q07hdvc","quantity":10}],"craftPreference":"buy"},
-  {"id":"u0q07hdvc","name":"Animal Bone","buyPrice":540,"sellPrice":540,"isCraftable":false,"recipe":[]},
-  {"id":"q8hvdduwt","name":"Stone Of Purity","buyPrice":5500,"sellPrice":5500,"isCraftable":false,"recipe":[]},
-  {"id":"yidr8kxu5","name":"Varnish","buyPrice":730,"sellPrice":730,"isCraftable":false,"recipe":[]},
-  {"id":"matndysdy","name":"Blacksmith Frame","buyPrice":256000,"sellPrice":256000,"isCraftable":true,"recipe":[{"itemId":"pscfz4ki6","quantity":10},{"itemId":"ek52qp38l","quantity":1},{"itemId":"hw1r8mpwa","quantity":5}]},
-  {"id":"pscfz4ki6","name":"Mithril Ore","buyPrice":9400,"sellPrice":9400,"isCraftable":false,"recipe":[]},
-  {"id":"rqphe5k1g","name":"Asofe","buyPrice":7500,"sellPrice":7500,"isCraftable":false,"recipe":[]},
-  {"id":"h2d9x1nwc","name":"Mold Glue","buyPrice":2000,"sellPrice":2000,"isCraftable":false,"recipe":[]},
-  {"id":"d23l0j7o4","name":"Maestro Mold","buyPrice":320000,"sellPrice":320000,"isCraftable":true,"recipe":[{"itemId":"h2d9x1nwc","quantity":10},{"itemId":"matndysdy","quantity":1},{"itemId":"rqphe5k1g","quantity":5}]},
-  {"id":"u73l6vdye","name":"Adamantite Nugget","buyPrice":1700,"sellPrice":1700,"isCraftable":false,"recipe":[]},
-  {"id":"xjt2jbe9w","name":"Steel Mold","buyPrice":6300,"sellPrice":6300,"isCraftable":true,"recipe":[{"itemId":"tu6g7d66r","quantity":5},{"itemId":"me6xh8mct","quantity":5},{"itemId":"k5rd74me9","quantity":5}],"craftPreference":"buy"},
-  {"id":"tu6g7d66r","name":"Iron Ore","buyPrice":650,"sellPrice":650,"isCraftable":false,"recipe":[]},
-  {"id":"myy67xiwx","name":"Artisan's Frame","buyPrice":250000,"sellPrice":250000,"isCraftable":true,"recipe":[{"itemId":"u73l6vdye","quantity":10},{"itemId":"xjt2jbe9w","quantity":1},{"itemId":"hw1r8mpwa","quantity":5}]}
+  {"id":"ek52qp38l","name":"Silver Mold","price":21000,"isCraftable":true,"recipe":[{"itemId":"me6xh8mct","quantity":5},{"itemId":"vrj494aw4","quantity":5},{"itemId":"t7udcw3i2","quantity":10}]},
+  {"id":"me6xh8mct","name":"Braided Hemp","price":230,"isCraftable":true,"recipe":[{"itemId":"eui3h7xdj","quantity":5}],"craftPreference":"buy"},
+  {"id":"eui3h7xdj","name":"Stem","price":35,"isCraftable":false,"recipe":[]},
+  {"id":"vrj494aw4","name":"Cokes","price":450,"isCraftable":true,"recipe":[{"itemId":"k5rd74me9","quantity":3},{"itemId":"43r72c1ab","quantity":3}]},
+  {"id":"k5rd74me9","name":"Coal","price":130,"isCraftable":false,"recipe":[]},
+  {"id":"43r72c1ab","name":"Charcoal","price":63,"isCraftable":false,"recipe":[]},
+  {"id":"t7udcw3i2","name":"Silver Nugget","price":155,"isCraftable":false,"recipe":[]},
+  {"id":"hw1r8mpwa","name":"Varnish of Purity","price":26000,"isCraftable":true,"recipe":[{"itemId":"q4n95tfbx","quantity":3},{"itemId":"q8hvdduwt","quantity":1},{"itemId":"yidr8kxu5","quantity":3}],"craftPreference":"buy"},
+  {"id":"q4n95tfbx","name":"Coarse Bone Powder","price":5800,"isCraftable":true,"recipe":[{"itemId":"u0q07hdvc","quantity":10}],"craftPreference":"buy"},
+  {"id":"u0q07hdvc","name":"Animal Bone","price":540,"isCraftable":false,"recipe":[]},
+  {"id":"q8hvdduwt","name":"Stone Of Purity","price":5500,"isCraftable":false,"recipe":[]},
+  {"id":"yidr8kxu5","name":"Varnish","price":730,"isCraftable":false,"recipe":[]},
+  {"id":"matndysdy","name":"Blacksmith Frame","price":256000,"isCraftable":true,"recipe":[{"itemId":"pscfz4ki6","quantity":10},{"itemId":"ek52qp38l","quantity":1},{"itemId":"hw1r8mpwa","quantity":5}]},
+  {"id":"pscfz4ki6","name":"Mithril Ore","price":9400,"isCraftable":false,"recipe":[]},
+  {"id":"rqphe5k1g","name":"Asofe","price":7500,"isCraftable":false,"recipe":[]},
+  {"id":"h2d9x1nwc","name":"Mold Glue","price":2000,"isCraftable":false,"recipe":[]},
+  {"id":"d23l0j7o4","name":"Maestro Mold","price":320000,"isCraftable":true,"recipe":[{"itemId":"h2d9x1nwc","quantity":10},{"itemId":"matndysdy","quantity":1},{"itemId":"rqphe5k1g","quantity":5}]},
+  {"id":"u73l6vdye","name":"Adamantite Nugget","price":1700,"isCraftable":false,"recipe":[]},
+  {"id":"xjt2jbe9w","name":"Steel Mold","price":6300,"isCraftable":true,"recipe":[{"itemId":"tu6g7d66r","quantity":5},{"itemId":"me6xh8mct","quantity":5},{"itemId":"k5rd74me9","quantity":5}],"craftPreference":"buy"},
+  {"id":"tu6g7d66r","name":"Iron Ore","price":650,"isCraftable":false,"recipe":[]},
+  {"id":"myy67xiwx","name":"Artisan's Frame","price":250000,"isCraftable":true,"recipe":[{"itemId":"u73l6vdye","quantity":10},{"itemId":"xjt2jbe9w","quantity":1},{"itemId":"hw1r8mpwa","quantity":5}]}
 ];
+
+// Migration helper: convert old buyPrice/sellPrice to price
+const migrateData = (data) => {
+  return data.map(item => {
+    if (item.price !== undefined) return item;
+    return {
+      ...item,
+      price: item.buyPrice || item.sellPrice || 0
+    };
+  });
+};
 
 export default function L2CraftPlanner() {
   const [items, setItems] = useState(() => {
     const saved = localStorage.getItem('l2-craft-items');
     if (saved) {
       const parsed = JSON.parse(saved);
-      if (parsed.length > 0) return parsed;
+      if (parsed.length > 0) return migrateData(parsed);
     }
     return DEFAULT_DATA;
   });
@@ -52,13 +63,12 @@ export default function L2CraftPlanner() {
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState('name');
   const [sortDesc, setSortDesc] = useState(false);
-  const [editingPrice, setEditingPrice] = useState(null); // { itemId, field: 'buyPrice' | 'sellPrice' }
+  const [editingPrice, setEditingPrice] = useState(null); // { itemId, field: 'price' }
 
   // New item form state
   const [newItem, setNewItem] = useState({
     name: '',
-    buyPrice: '',
-    sellPrice: '',
+    price: '',
     isCraftable: false,
     recipe: []
   });
@@ -82,7 +92,7 @@ export default function L2CraftPlanner() {
     if (!item) return 0;
     
     if (!item.isCraftable || item.recipe.length === 0) {
-      return item.buyPrice * quantity;
+      return item.price * quantity;
     }
     
     let totalCost = 0;
@@ -93,7 +103,7 @@ export default function L2CraftPlanner() {
       if (ingredientItem.isCraftable && ingredientItem.recipe.length > 0) {
         totalCost += calculateCraftCost(ingredient.itemId, ingredient.quantity * quantity, new Set(visited));
       } else {
-        totalCost += ingredientItem.buyPrice * ingredient.quantity * quantity;
+        totalCost += ingredientItem.price * ingredient.quantity * quantity;
       }
     }
     return totalCost;
@@ -103,14 +113,14 @@ export default function L2CraftPlanner() {
   const calculateBuyCost = (itemId, quantity = 1) => {
     const item = items.find(i => i.id === itemId);
     if (!item || !item.isCraftable || item.recipe.length === 0) {
-      return item ? item.buyPrice * quantity : 0;
+      return item ? item.price * quantity : 0;
     }
     
     let totalCost = 0;
     for (const ingredient of item.recipe) {
       const ingredientItem = items.find(i => i.id === ingredient.itemId);
       if (ingredientItem) {
-        totalCost += ingredientItem.buyPrice * ingredient.quantity * quantity;
+        totalCost += ingredientItem.price * ingredient.quantity * quantity;
       }
     }
     return totalCost;
@@ -127,7 +137,7 @@ export default function L2CraftPlanner() {
     
     // Base material - must buy
     if (!item.isCraftable || item.recipe.length === 0) {
-      return { cost: item.buyPrice * quantity, decisions: [] };
+      return { cost: item.price * quantity, decisions: [] };
     }
     
     // Calculate cost to craft this item (recursively optimal)
@@ -144,7 +154,7 @@ export default function L2CraftPlanner() {
         // This ingredient is craftable - check preference first
         const pref = ingredientItem.craftPreference || 'auto';
         const optimalResult = calculateOptimalCost(ingredient.itemId, ingQty, new Set(visited));
-        const buyCostForIng = ingredientItem.buyPrice * ingQty;
+        const buyCostForIng = ingredientItem.price * ingQty;
         
         let decision;
         let usedCost;
@@ -186,7 +196,7 @@ export default function L2CraftPlanner() {
         }
       } else {
         // Base material - must buy
-        craftCost += ingredientItem.buyPrice * ingQty;
+        craftCost += ingredientItem.price * ingQty;
       }
     }
     
@@ -205,7 +215,7 @@ export default function L2CraftPlanner() {
       const item = items.find(i => i.id === id);
       if (!item || !item.isCraftable || item.recipe.length === 0) return;
       
-      const buyCost = item.buyPrice * qty;
+      const buyCost = item.price * qty;
       const craftCost = calculateCraftCost(id, qty);
       const savings = buyCost - craftCost;
       const pref = item.craftPreference || 'auto';
@@ -297,11 +307,8 @@ export default function L2CraftPlanner() {
         case 'name':
           comparison = a.name.localeCompare(b.name);
           break;
-        case 'buyPrice':
-          comparison = a.buyPrice - b.buyPrice;
-          break;
-        case 'sellPrice':
-          comparison = a.sellPrice - b.sellPrice;
+        case 'price':
+          comparison = a.price - b.price;
           break;
         case 'craftCost':
           const craftCostA = a.isCraftable ? calculateCraftCost(a.id) : 0;
@@ -309,8 +316,8 @@ export default function L2CraftPlanner() {
           comparison = craftCostA - craftCostB;
           break;
         case 'profit':
-          const profitA = a.isCraftable ? calculateProfit(a.sellPrice, calculateCraftCost(a.id)) : 0;
-          const profitB = b.isCraftable ? calculateProfit(b.sellPrice, calculateCraftCost(b.id)) : 0;
+          const profitA = a.isCraftable ? calculateProfit(a.price, calculateCraftCost(a.id)) : 0;
+          const profitB = b.isCraftable ? calculateProfit(b.price, calculateCraftCost(b.id)) : 0;
           comparison = profitA - profitB;
           break;
         default:
@@ -336,14 +343,13 @@ export default function L2CraftPlanner() {
     const item = {
       id: generateId(),
       name: newItem.name.trim(),
-      buyPrice: parseFloat(newItem.buyPrice) || 0,
-      sellPrice: parseFloat(newItem.sellPrice) || 0,
+      price: parseFloat(newItem.price) || 0,
       isCraftable: newItem.isCraftable,
       recipe: []
     };
     
     setItems([...items, item]);
-    setNewItem({ name: '', buyPrice: '', sellPrice: '', isCraftable: false, recipe: [] });
+    setNewItem({ name: '', price: '', isCraftable: false, recipe: [] });
   };
 
   // Delete item
@@ -738,18 +744,14 @@ export default function L2CraftPlanner() {
               value={newItem.name}
               onChange={e => setNewItem({...newItem, name: e.target.value})}
               onKeyDown={e => e.key === 'Enter' && handleAddItem()}
+              style={{ flex: 2 }}
             />
             <input
               type="number"
-              placeholder="Buy price"
-              value={newItem.buyPrice}
-              onChange={e => setNewItem({...newItem, buyPrice: e.target.value})}
-            />
-            <input
-              type="number"
-              placeholder="Sell price"
-              value={newItem.sellPrice}
-              onChange={e => setNewItem({...newItem, sellPrice: e.target.value})}
+              placeholder="Price"
+              value={newItem.price}
+              onChange={e => setNewItem({...newItem, price: e.target.value})}
+              style={{ flex: 1 }}
             />
             <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
               <input
@@ -784,8 +786,7 @@ export default function L2CraftPlanner() {
               }}
             >
               <option value="name">Sort by Name</option>
-              <option value="buyPrice">Sort by Buy Price</option>
-              <option value="sellPrice">Sort by Sell Price</option>
+              <option value="price">Sort by Price</option>
               <option value="profit">Sort by Profit</option>
             </select>
             <button 
@@ -798,7 +799,7 @@ export default function L2CraftPlanner() {
           </div>
 
           {/* Items Table */}
-          <div className="table-header" style={{ gridTemplateColumns: '2fr 1fr 1fr 1fr 1fr 120px 100px' }}>
+          <div className="table-header" style={{ gridTemplateColumns: '2fr 1fr 1fr 1fr 120px 100px' }}>
             <span 
               onClick={() => { setSortBy('name'); if (sortBy === 'name') setSortDesc(!sortDesc); }}
               style={{ cursor: 'pointer', userSelect: 'none' }}
@@ -806,16 +807,10 @@ export default function L2CraftPlanner() {
               Item {sortBy === 'name' && (sortDesc ? '↓' : '↑')}
             </span>
             <span 
-              onClick={() => { setSortBy('buyPrice'); if (sortBy === 'buyPrice') setSortDesc(!sortDesc); }}
+              onClick={() => { setSortBy('price'); if (sortBy === 'price') setSortDesc(!sortDesc); }}
               style={{ cursor: 'pointer', userSelect: 'none' }}
             >
-              Buy {sortBy === 'buyPrice' && (sortDesc ? '↓' : '↑')}
-            </span>
-            <span 
-              onClick={() => { setSortBy('sellPrice'); if (sortBy === 'sellPrice') setSortDesc(!sortDesc); }}
-              style={{ cursor: 'pointer', userSelect: 'none' }}
-            >
-              Sell {sortBy === 'sellPrice' && (sortDesc ? '↓' : '↑')}
+              Price {sortBy === 'price' && (sortDesc ? '↓' : '↑')}
             </span>
             <span 
               onClick={() => { setSortBy('craftCost'); if (sortBy === 'craftCost') setSortDesc(!sortDesc); }}
@@ -841,28 +836,28 @@ export default function L2CraftPlanner() {
             ) : (
               filteredItems.map(item => {
                 const craftCost = item.isCraftable ? calculateCraftCost(item.id) : null;
-                const profit = craftCost !== null ? calculateProfit(item.sellPrice, craftCost) : null;
+                const profit = craftCost !== null ? calculateProfit(item.price, craftCost) : null;
                 const pref = item.craftPreference || 'auto';
                 
                 return (
-                  <div key={item.id} className="table-row" style={{ gridTemplateColumns: '2fr 1fr 1fr 1fr 1fr 120px 100px' }}>
+                  <div key={item.id} className="table-row" style={{ gridTemplateColumns: '2fr 1fr 1fr 1fr 120px 100px' }}>
                     <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                       {item.isCraftable && <span title="Craftable">🔨</span>}
                       <strong>{item.name}</strong>
                     </span>
                     <span 
-                      onDoubleClick={() => setEditingPrice({ itemId: item.id, field: 'buyPrice' })}
+                      onDoubleClick={() => setEditingPrice({ itemId: item.id, field: 'price' })}
                       style={{ cursor: 'pointer' }}
                       title="Double-click to edit"
                     >
-                      {editingPrice?.itemId === item.id && editingPrice?.field === 'buyPrice' ? (
+                      {editingPrice?.itemId === item.id && editingPrice?.field === 'price' ? (
                         <input
                           type="number"
-                          defaultValue={item.buyPrice}
+                          defaultValue={item.price}
                           autoFocus
-                          onBlur={(e) => updateItemPrice(item.id, 'buyPrice', e.target.value)}
+                          onBlur={(e) => updateItemPrice(item.id, 'price', e.target.value)}
                           onKeyDown={(e) => {
-                            if (e.key === 'Enter') updateItemPrice(item.id, 'buyPrice', e.target.value);
+                            if (e.key === 'Enter') updateItemPrice(item.id, 'price', e.target.value);
                             if (e.key === 'Escape') setEditingPrice(null);
                           }}
                           style={{ 
@@ -875,35 +870,7 @@ export default function L2CraftPlanner() {
                           }}
                         />
                       ) : (
-                        formatNumber(item.buyPrice)
-                      )}
-                    </span>
-                    <span 
-                      onDoubleClick={() => setEditingPrice({ itemId: item.id, field: 'sellPrice' })}
-                      style={{ cursor: 'pointer' }}
-                      title="Double-click to edit"
-                    >
-                      {editingPrice?.itemId === item.id && editingPrice?.field === 'sellPrice' ? (
-                        <input
-                          type="number"
-                          defaultValue={item.sellPrice}
-                          autoFocus
-                          onBlur={(e) => updateItemPrice(item.id, 'sellPrice', e.target.value)}
-                          onKeyDown={(e) => {
-                            if (e.key === 'Enter') updateItemPrice(item.id, 'sellPrice', e.target.value);
-                            if (e.key === 'Escape') setEditingPrice(null);
-                          }}
-                          style={{ 
-                            width: '80px', 
-                            padding: '4px 8px',
-                            background: 'rgba(20, 20, 30, 0.9)',
-                            border: '1px solid #8b7355',
-                            color: '#c9b89d',
-                            borderRadius: '3px'
-                          }}
-                        />
-                      ) : (
-                        formatNumber(item.sellPrice)
+                        formatNumber(item.price)
                       )}
                     </span>
                     <span>{craftCost !== null ? formatNumber(craftCost) : '-'}</span>
@@ -912,7 +879,7 @@ export default function L2CraftPlanner() {
                         <>
                           {profit >= 0 ? '+' : ''}{formatNumber(profit)}
                           <small style={{ marginLeft: '6px', opacity: 0.7 }}>
-                            ({calculateMargin(item.sellPrice, craftCost)}%)
+                            ({calculateMargin(item.price, craftCost)}%)
                           </small>
                         </>
                       ) : '-'}
@@ -995,9 +962,9 @@ export default function L2CraftPlanner() {
                     <h3 style={{ margin: 0, color: '#d4c4a8' }}>🔨 {item.name}</h3>
                     <span style={{ color: '#6b5d4d', fontSize: '13px' }}>
                       Craft Cost: {formatNumber(calculateCraftCost(item.id))} | 
-                      Sell: {formatNumber(item.sellPrice)} | 
-                      <span className={calculateProfit(item.sellPrice, calculateCraftCost(item.id)) >= 0 ? 'profit-positive' : 'profit-negative'}>
-                        {' '}Profit: {formatNumber(calculateProfit(item.sellPrice, calculateCraftCost(item.id)))}
+                      Sell: {formatNumber(item.price)} | 
+                      <span className={calculateProfit(item.price, calculateCraftCost(item.id)) >= 0 ? 'profit-positive' : 'profit-negative'}>
+                        {' '}Profit: {formatNumber(calculateProfit(item.price, calculateCraftCost(item.id)))}
                       </span>
                     </span>
                   </div>
@@ -1014,7 +981,7 @@ export default function L2CraftPlanner() {
                             <span>{ingItem.name}</span>
                             <span style={{ color: '#8b7355' }}>×{ing.quantity}</span>
                             <span style={{ color: '#6b5d4d', fontSize: '11px' }}>
-                              ({formatNumber(ingItem.buyPrice * ing.quantity)})
+                              ({formatNumber(ingItem.price * ing.quantity)})
                             </span>
                             <button 
                               onClick={() => handleRemoveIngredient(item.id, ing.itemId)}
@@ -1051,7 +1018,7 @@ export default function L2CraftPlanner() {
                       {sortedItemsForDropdown
                         .filter(i => i.id !== item.id && !item.recipe.find(r => r.itemId === i.id))
                         .map(i => (
-                          <option key={i.id} value={i.id}>{i.name} ({formatNumber(i.buyPrice)})</option>
+                          <option key={i.id} value={i.id}>{i.name} ({formatNumber(i.price)})</option>
                         ))}
                     </select>
                     <input
@@ -1142,7 +1109,7 @@ export default function L2CraftPlanner() {
             const optimalResult = calculateOptimalCost(item.id, craftQuantity);
             const optimalCost = optimalResult.cost;
             
-            const totalSellValue = item.sellPrice * craftQuantity;
+            const totalSellValue = item.price * craftQuantity;
             
             const profitBuyAll = totalSellValue - buyAllCost;
             const profitCraftAll = totalSellValue - craftAllCost;
@@ -1339,7 +1306,7 @@ export default function L2CraftPlanner() {
                           id: itemId,
                           name: itm.name,
                           quantity,
-                          unitPrice: itm.buyPrice,
+                          unitPrice: itm.price,
                           forCraft: parentName,
                           isBaseMaterial: true
                         });
@@ -1350,7 +1317,7 @@ export default function L2CraftPlanner() {
                     // Craftable item - check preference
                     const pref = itm.craftPreference || 'auto';
                     const craftCostSingle = calculateCraftCost(itemId, 1);
-                    const shouldBuy = pref === 'buy' || (pref === 'auto' && itm.buyPrice <= craftCostSingle);
+                    const shouldBuy = pref === 'buy' || (pref === 'auto' && itm.price <= craftCostSingle);
                     
                     if (shouldBuy) {
                       // Buy this craftable item directly
@@ -1362,7 +1329,7 @@ export default function L2CraftPlanner() {
                           id: itemId,
                           name: itm.name,
                           quantity,
-                          unitPrice: itm.buyPrice,
+                          unitPrice: itm.price,
                           forCraft: parentName,
                           isBaseMaterial: false,
                           preference: pref
@@ -1384,17 +1351,17 @@ export default function L2CraftPlanner() {
                         
                         const ingQty = ing.quantity * quantity;
                         const ingPref = ingItem.craftPreference || 'auto';
-                        const ingCraftCost = ingItem.isCraftable ? calculateCraftCost(ing.itemId, 1) : ingItem.buyPrice;
+                        const ingCraftCost = ingItem.isCraftable ? calculateCraftCost(ing.itemId, 1) : ingItem.price;
                         const ingShouldBuy = !ingItem.isCraftable || 
                                             ingItem.recipe.length === 0 || 
                                             ingPref === 'buy' || 
-                                            (ingPref === 'auto' && ingItem.buyPrice <= ingCraftCost);
+                                            (ingPref === 'auto' && ingItem.price <= ingCraftCost);
                         
                         craftEntry.materials.push({
                           id: ing.itemId,
                           name: ingItem.name,
                           quantity: ingQty,
-                          unitPrice: ingItem.buyPrice,
+                          unitPrice: ingItem.price,
                           action: ingShouldBuy ? 'BUY' : 'CRAFT'
                         });
                         
@@ -1421,17 +1388,17 @@ export default function L2CraftPlanner() {
                     
                     const ingQty = ing.quantity * craftQuantity;
                     const ingPref = ingItem.craftPreference || 'auto';
-                    const ingCraftCost = ingItem.isCraftable ? calculateCraftCost(ing.itemId, 1) : ingItem.buyPrice;
+                    const ingCraftCost = ingItem.isCraftable ? calculateCraftCost(ing.itemId, 1) : ingItem.price;
                     const ingShouldBuy = !ingItem.isCraftable || 
                                         ingItem.recipe.length === 0 || 
                                         ingPref === 'buy' || 
-                                        (ingPref === 'auto' && ingItem.buyPrice <= ingCraftCost);
+                                        (ingPref === 'auto' && ingItem.price <= ingCraftCost);
                     
                     mainCraftEntry.materials.push({
                       id: ing.itemId,
                       name: ingItem.name,
                       quantity: ingQty,
-                      unitPrice: ingItem.buyPrice,
+                      unitPrice: ingItem.price,
                       action: ingShouldBuy ? 'BUY' : 'CRAFT'
                     });
                   }
@@ -1453,7 +1420,7 @@ export default function L2CraftPlanner() {
                           id: ing.itemId,
                           name: ingItem.name,
                           quantity: ing.quantity * craftQuantity,
-                          unitPrice: ingItem.buyPrice,
+                          unitPrice: ingItem.price,
                           forCraft: item.name,
                           isBaseMaterial: true
                         });
@@ -1537,7 +1504,36 @@ export default function L2CraftPlanner() {
                                 )}
                               </span>
                               <span style={{ color: '#8b7355' }}>×{formatNumber(b.quantity)}</span>
-                              <span>{formatNumber(b.unitPrice)}</span>
+                              <span 
+                                onClick={() => setEditingPrice({ itemId: b.id, field: 'price' })}
+                                style={{ cursor: 'pointer', padding: '2px 6px', borderRadius: '3px', background: 'rgba(139, 115, 85, 0.2)' }}
+                                title="Click to edit price"
+                              >
+                                {editingPrice?.itemId === b.id ? (
+                                  <input
+                                    type="number"
+                                    defaultValue={b.unitPrice}
+                                    autoFocus
+                                    onBlur={(e) => updateItemPrice(b.id, 'price', e.target.value)}
+                                    onKeyDown={(e) => {
+                                      if (e.key === 'Enter') updateItemPrice(b.id, 'price', e.target.value);
+                                      if (e.key === 'Escape') setEditingPrice(null);
+                                    }}
+                                    onClick={(e) => e.stopPropagation()}
+                                    style={{ 
+                                      width: '70px', 
+                                      padding: '2px 6px',
+                                      background: 'rgba(20, 20, 30, 0.9)',
+                                      border: '1px solid #8b7355',
+                                      color: '#c9b89d',
+                                      borderRadius: '3px',
+                                      fontSize: '13px'
+                                    }}
+                                  />
+                                ) : (
+                                  formatNumber(b.unitPrice)
+                                )}
+                              </span>
                               <span style={{ color: '#d9534f' }}>{formatNumber(b.unitPrice * b.quantity)}</span>
                             </div>
                           ))
@@ -1663,7 +1659,7 @@ export default function L2CraftPlanner() {
                   .map(item => ({
                     ...item,
                     craftCost: calculateCraftCost(item.id),
-                    profit: calculateProfit(item.sellPrice, calculateCraftCost(item.id))
+                    profit: calculateProfit(item.price, calculateCraftCost(item.id))
                   }))
                   .sort((a, b) => b.profit - a.profit)
                   .map((item, index) => (
@@ -1682,9 +1678,9 @@ export default function L2CraftPlanner() {
                       </span>
                       <span style={{ fontWeight: 600 }}>{item.name}</span>
                       <span style={{ color: '#6b5d4d' }}>Cost: {formatNumber(item.craftCost)}</span>
-                      <span style={{ color: '#5bc0de' }}>Sell: {formatNumber(item.sellPrice)}</span>
+                      <span style={{ color: '#5bc0de' }}>Sell: {formatNumber(item.price)}</span>
                       <span className={item.profit >= 0 ? 'profit-positive' : 'profit-negative'}>
-                        {item.profit >= 0 ? '+' : ''}{formatNumber(item.profit)} ({calculateMargin(item.sellPrice, item.craftCost)}%)
+                        {item.profit >= 0 ? '+' : ''}{formatNumber(item.profit)} ({calculateMargin(item.price, item.craftCost)}%)
                       </span>
                     </div>
                   ))}
@@ -1733,7 +1729,7 @@ export default function L2CraftPlanner() {
                     Profitable Crafts
                   </div>
                   <div style={{ fontSize: '32px', fontWeight: 700 }} className="profit-positive">
-                    {craftableItems.filter(i => calculateProfit(i.sellPrice, calculateCraftCost(i.id)) > 0).length}
+                    {craftableItems.filter(i => calculateProfit(i.price, calculateCraftCost(i.id)) > 0).length}
                   </div>
                 </div>
               </div>
@@ -1768,15 +1764,9 @@ export default function L2CraftPlanner() {
               />
               <input
                 type="number"
-                value={editingItem.buyPrice}
-                onChange={e => setEditingItem({...editingItem, buyPrice: parseFloat(e.target.value) || 0})}
-                placeholder="Buy price"
-              />
-              <input
-                type="number"
-                value={editingItem.sellPrice}
-                onChange={e => setEditingItem({...editingItem, sellPrice: parseFloat(e.target.value) || 0})}
-                placeholder="Sell price"
+                value={editingItem.price}
+                onChange={e => setEditingItem({...editingItem, price: parseFloat(e.target.value) || 0})}
+                placeholder="Price"
               />
               <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
                 <input
