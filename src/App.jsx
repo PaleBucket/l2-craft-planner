@@ -1428,131 +1428,16 @@ export default function L2CraftPlanner() {
                     }
                   }
                   
-                  // Consolidate toBuy by item (sum quantities)
-                  const consolidatedBuy = [];
-                  toBuy.forEach(b => {
-                    const existing = consolidatedBuy.find(c => c.id === b.id);
-                    if (existing) {
-                      existing.quantity += b.quantity;
-                      if (b.forCraft && !existing.forCrafts.includes(b.forCraft)) {
-                        existing.forCrafts.push(b.forCraft);
-                      }
-                    } else {
-                      consolidatedBuy.push({
-                        ...b,
-                        forCrafts: b.forCraft ? [b.forCraft] : []
-                      });
-                    }
+                  // Calculate step costs for each craft
+                  toCraft.forEach(craft => {
+                    craft.stepCost = craft.materials.reduce((sum, mat) => sum + (mat.unitPrice * mat.quantity), 0);
                   });
                   
-                  const totalBuyCost = consolidatedBuy.reduce((sum, b) => sum + (b.unitPrice * b.quantity), 0);
+                  const grandTotal = toCraft.reduce((sum, craft) => sum + craft.stepCost, 0);
                   
                   return (
                     <>
-                      {/* What to Buy */}
-                      <h3 style={{ color: '#d4c4a8', marginBottom: '16px', fontSize: '16px', letterSpacing: '1px' }}>
-                        💰 SHOPPING LIST (What to Buy)
-                      </h3>
-                      <div style={{ 
-                        background: 'rgba(30, 30, 40, 0.4)', 
-                        borderRadius: '6px',
-                        border: '1px solid #2a2520',
-                        overflow: 'hidden',
-                        marginBottom: '24px'
-                      }}>
-                        <div style={{ 
-                          display: 'grid', 
-                          gridTemplateColumns: '2fr 1fr 1fr 1fr',
-                          padding: '10px 16px',
-                          background: 'rgba(30, 30, 40, 0.6)',
-                          borderBottom: '1px solid #2a2520',
-                          fontSize: '11px',
-                          textTransform: 'uppercase',
-                          letterSpacing: '1px',
-                          color: '#8b7d6d'
-                        }}>
-                          <span>Item</span>
-                          <span>Quantity</span>
-                          <span>Unit Price</span>
-                          <span>Total</span>
-                        </div>
-                        {consolidatedBuy.length === 0 ? (
-                          <div style={{ padding: '20px', textAlign: 'center', color: '#6b5d4d' }}>
-                            Nothing to buy - all items crafted
-                          </div>
-                        ) : (
-                          consolidatedBuy.map((b, idx) => (
-                            <div key={idx} style={{ 
-                              display: 'grid', 
-                              gridTemplateColumns: '2fr 1fr 1fr 1fr',
-                              padding: '12px 16px',
-                              borderBottom: '1px solid rgba(42, 37, 32, 0.3)'
-                            }}>
-                              <span>
-                                {b.name}
-                                {!b.isBaseMaterial && (
-                                  <span style={{ 
-                                    marginLeft: '8px', 
-                                    fontSize: '10px', 
-                                    padding: '2px 6px', 
-                                    background: 'rgba(100, 50, 50, 0.4)', 
-                                    borderRadius: '3px',
-                                    color: '#ff9999'
-                                  }}>
-                                    buying instead of crafting
-                                  </span>
-                                )}
-                              </span>
-                              <span style={{ color: '#8b7355' }}>×{formatNumber(b.quantity)}</span>
-                              <span 
-                                onClick={() => setEditingPrice({ itemId: b.id, field: 'price' })}
-                                style={{ cursor: 'pointer', padding: '2px 6px', borderRadius: '3px', background: 'rgba(139, 115, 85, 0.2)' }}
-                                title="Click to edit price"
-                              >
-                                {editingPrice?.itemId === b.id ? (
-                                  <input
-                                    type="number"
-                                    defaultValue={b.unitPrice}
-                                    autoFocus
-                                    onBlur={(e) => updateItemPrice(b.id, 'price', e.target.value)}
-                                    onKeyDown={(e) => {
-                                      if (e.key === 'Enter') updateItemPrice(b.id, 'price', e.target.value);
-                                      if (e.key === 'Escape') setEditingPrice(null);
-                                    }}
-                                    onClick={(e) => e.stopPropagation()}
-                                    style={{ 
-                                      width: '70px', 
-                                      padding: '2px 6px',
-                                      background: 'rgba(20, 20, 30, 0.9)',
-                                      border: '1px solid #8b7355',
-                                      color: '#c9b89d',
-                                      borderRadius: '3px',
-                                      fontSize: '13px'
-                                    }}
-                                  />
-                                ) : (
-                                  formatNumber(b.unitPrice)
-                                )}
-                              </span>
-                              <span style={{ color: '#d9534f' }}>{formatNumber(b.unitPrice * b.quantity)}</span>
-                            </div>
-                          ))
-                        )}
-                        <div style={{ 
-                          display: 'grid', 
-                          gridTemplateColumns: '2fr 1fr 1fr 1fr',
-                          padding: '12px 16px',
-                          background: 'rgba(30, 30, 40, 0.6)',
-                          fontWeight: 600
-                        }}>
-                          <span>TOTAL TO SPEND</span>
-                          <span></span>
-                          <span></span>
-                          <span style={{ color: '#d9534f', fontSize: '16px' }}>{formatNumber(totalBuyCost)}</span>
-                        </div>
-                      </div>
-                      
-                      {/* What to Craft */}
+                      {/* Crafting Steps */}
                       {toCraft.length > 0 && (
                         <>
                           <h3 style={{ color: '#d4c4a8', marginBottom: '16px', fontSize: '16px', letterSpacing: '1px' }}>
@@ -1595,31 +1480,86 @@ export default function L2CraftPlanner() {
                                     </span>
                                   )}
                                 </span>
+                                <span style={{ color: '#d9534f', fontWeight: 600 }}>
+                                  Step: {formatNumber(craft.stepCost)}
+                                </span>
                               </div>
                               <div style={{ 
                                 display: 'grid', 
-                                gridTemplateColumns: '2fr 1fr 1fr',
+                                gridTemplateColumns: '2fr 1fr 1fr 1fr',
                                 gap: '4px',
                                 fontSize: '13px'
                               }}>
                                 <span style={{ color: '#6b5d4d', fontSize: '11px', textTransform: 'uppercase' }}>Material</span>
-                                <span style={{ color: '#6b5d4d', fontSize: '11px', textTransform: 'uppercase' }}>Qty Needed</span>
-                                <span style={{ color: '#6b5d4d', fontSize: '11px', textTransform: 'uppercase' }}>Source</span>
+                                <span style={{ color: '#6b5d4d', fontSize: '11px', textTransform: 'uppercase' }}>Qty</span>
+                                <span style={{ color: '#6b5d4d', fontSize: '11px', textTransform: 'uppercase' }}>Price</span>
+                                <span style={{ color: '#6b5d4d', fontSize: '11px', textTransform: 'uppercase' }}>Total</span>
                                 {craft.materials.map((mat, mIdx) => (
                                   <React.Fragment key={mIdx}>
-                                    <span>{mat.name}</span>
-                                    <span style={{ color: '#8b7355' }}>×{formatNumber(mat.quantity)}</span>
-                                    <span style={{ 
-                                      color: mat.action === 'BUY' ? '#ff9999' : '#90ee90',
-                                      fontWeight: 500
-                                    }}>
-                                      {mat.action === 'BUY' ? '💰 Buy' : '🔨 Craft'}
+                                    <span>
+                                      {mat.name}
+                                      {mat.action === 'CRAFT' && <span style={{ color: '#90ee90', marginLeft: '4px' }}>🔨</span>}
                                     </span>
+                                    <span style={{ color: '#8b7355' }}>×{formatNumber(mat.quantity)}</span>
+                                    <span 
+                                      onClick={() => setEditingPrice({ itemId: mat.id, field: 'price' })}
+                                      style={{ 
+                                        cursor: 'pointer', 
+                                        padding: '2px 6px', 
+                                        borderRadius: '3px', 
+                                        background: 'rgba(139, 115, 85, 0.2)'
+                                      }}
+                                      title="Click to edit"
+                                    >
+                                      {editingPrice?.itemId === mat.id ? (
+                                        <input
+                                          type="number"
+                                          defaultValue={mat.unitPrice}
+                                          autoFocus
+                                          onBlur={(e) => updateItemPrice(mat.id, 'price', e.target.value)}
+                                          onKeyDown={(e) => {
+                                            if (e.key === 'Enter') updateItemPrice(mat.id, 'price', e.target.value);
+                                            if (e.key === 'Escape') setEditingPrice(null);
+                                          }}
+                                          onClick={(e) => e.stopPropagation()}
+                                          style={{ 
+                                            width: '60px', 
+                                            padding: '2px 4px',
+                                            background: 'rgba(20, 20, 30, 0.9)',
+                                            border: '1px solid #8b7355',
+                                            color: '#c9b89d',
+                                            borderRadius: '3px',
+                                            fontSize: '12px'
+                                          }}
+                                        />
+                                      ) : (
+                                        formatNumber(mat.unitPrice)
+                                      )}
+                                    </span>
+                                    <span style={{ color: '#d9534f' }}>{formatNumber(mat.unitPrice * mat.quantity)}</span>
                                   </React.Fragment>
                                 ))}
                               </div>
                             </div>
                           ))}
+                          
+                          {/* Grand Total */}
+                          <div style={{ 
+                            background: 'rgba(30, 30, 40, 0.6)', 
+                            borderRadius: '6px',
+                            border: '1px solid #2a2520',
+                            padding: '16px',
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            alignItems: 'center'
+                          }}>
+                            <span style={{ fontSize: '16px', fontWeight: 600, color: '#d4c4a8' }}>
+                              TOTAL MATERIALS COST
+                            </span>
+                            <span style={{ fontSize: '20px', fontWeight: 600, color: '#d9534f' }}>
+                              {formatNumber(grandTotal)}
+                            </span>
+                          </div>
                         </>
                       )}
                     </>
@@ -1631,6 +1571,8 @@ export default function L2CraftPlanner() {
         </div>
       )}
 
+      {/* Analytics Tab */}
+      {activeTab === 'analytics' && (
       {/* Analytics Tab */}
       {activeTab === 'analytics' && (
         <div className="card">
