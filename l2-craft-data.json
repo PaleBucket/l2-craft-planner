@@ -1,0 +1,209 @@
+[
+  {
+    "id": "ek52qp38l",
+    "name": "Silver Mold",
+    "buyPrice": 30000,
+    "sellPrice": 30000,
+    "isCraftable": true,
+    "recipe": [
+      {
+        "itemId": "me6xh8mct",
+        "quantity": 5
+      },
+      {
+        "itemId": "vrj494aw4",
+        "quantity": 5
+      },
+      {
+        "itemId": "t7udcw3i2",
+        "quantity": 10
+      }
+    ]
+  },
+  {
+    "id": "me6xh8mct",
+    "name": "Braided Hemp",
+    "buyPrice": 230,
+    "sellPrice": 230,
+    "isCraftable": true,
+    "recipe": [
+      {
+        "itemId": "eui3h7xdj",
+        "quantity": 5
+      }
+    ]
+  },
+  {
+    "id": "eui3h7xdj",
+    "name": "Stem",
+    "buyPrice": 35,
+    "sellPrice": 35,
+    "isCraftable": false,
+    "recipe": []
+  },
+  {
+    "id": "vrj494aw4",
+    "name": "Cokes",
+    "buyPrice": 450,
+    "sellPrice": 450,
+    "isCraftable": true,
+    "recipe": [
+      {
+        "itemId": "k5rd74me9",
+        "quantity": 3
+      },
+      {
+        "itemId": "43r72c1ab",
+        "quantity": 3
+      }
+    ]
+  },
+  {
+    "id": "k5rd74me9",
+    "name": "Coal",
+    "buyPrice": 130,
+    "sellPrice": 130,
+    "isCraftable": false,
+    "recipe": []
+  },
+  {
+    "id": "43r72c1ab",
+    "name": "Charcoal",
+    "buyPrice": 63,
+    "sellPrice": 63,
+    "isCraftable": false,
+    "recipe": []
+  },
+  {
+    "id": "t7udcw3i2",
+    "name": "Silver Nugget",
+    "buyPrice": 155,
+    "sellPrice": 155,
+    "isCraftable": false,
+    "recipe": []
+  },
+  {
+    "id": "hw1r8mpwa",
+    "name": "Varnish of Purity",
+    "buyPrice": 26000,
+    "sellPrice": 26000,
+    "isCraftable": true,
+    "recipe": [
+      {
+        "itemId": "q4n95tfbx",
+        "quantity": 3
+      },
+      {
+        "itemId": "q8hvdduwt",
+        "quantity": 1
+      },
+      {
+        "itemId": "yidr8kxu5",
+        "quantity": 3
+      }
+    ]
+  },
+  {
+    "id": "q4n95tfbx",
+    "name": "Coarse Bone Powder",
+    "buyPrice": 5800,
+    "sellPrice": 5800,
+    "isCraftable": true,
+    "recipe": [
+      {
+        "itemId": "u0q07hdvc",
+        "quantity": 10
+      }
+    ]
+  },
+  {
+    "id": "u0q07hdvc",
+    "name": "Animal Bone",
+    "buyPrice": 540,
+    "sellPrice": 540,
+    "isCraftable": false,
+    "recipe": []
+  },
+  {
+    "id": "q8hvdduwt",
+    "name": "Stone Of Purity",
+    "buyPrice": 5500,
+    "sellPrice": 5500,
+    "isCraftable": false,
+    "recipe": []
+  },
+  {
+    "id": "yidr8kxu5",
+    "name": "Varnish",
+    "buyPrice": 730,
+    "sellPrice": 730,
+    "isCraftable": false,
+    "recipe": []
+  },
+  {
+    "id": "matndysdy",
+    "name": "Blacksmith Frame",
+    "buyPrice": 256000,
+    "sellPrice": 256000,
+    "isCraftable": true,
+    "recipe": [
+      {
+        "itemId": "pscfz4ki6",
+        "quantity": 10
+      },
+      {
+        "itemId": "ek52qp38l",
+        "quantity": 1
+      },
+      {
+        "itemId": "hw1r8mpwa",
+        "quantity": 5
+      }
+    ]
+  },
+  {
+    "id": "pscfz4ki6",
+    "name": "Mithril Ore",
+    "buyPrice": 9400,
+    "sellPrice": 9400,
+    "isCraftable": false,
+    "recipe": []
+  },
+  {
+    "id": "rqphe5k1g",
+    "name": "Asofe",
+    "buyPrice": 7500,
+    "sellPrice": 7500,
+    "isCraftable": false,
+    "recipe": []
+  },
+  {
+    "id": "h2d9x1nwc",
+    "name": "Mold Glue",
+    "buyPrice": 2000,
+    "sellPrice": 2000,
+    "isCraftable": false,
+    "recipe": []
+  },
+  {
+    "id": "d23l0j7o4",
+    "name": "Maestro Mold",
+    "buyPrice": 330000,
+    "sellPrice": 330000,
+    "isCraftable": true,
+    "recipe": [
+      {
+        "itemId": "h2d9x1nwc",
+        "quantity": 10
+      },
+      {
+        "itemId": "matndysdy",
+        "quantity": 1
+      },
+      {
+        "itemId": "rqphe5k1g",
+        "quantity": 5
+      }
+    ]
+  }
+]
